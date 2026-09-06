@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ReDood</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    background:#050505;
+    color:#ddd;
+    font-family:monospace;
+}
+#app{
+    max-width:850px;
+    margin:auto;
+    padding:25px;
+}
+h1{
+    color:#b00000;
+    text-align:center;
+    letter-spacing:5px;
+}
+button{
+    width:100%;
+    margin:7px 0;
+    padding:15px;
+    background:#0d0d0d;
+    color:#ddd;
+    border:1px solid #444;
+    font:inherit;
+    cursor:pointer;
+}
+button:hover{background:#191919}
+#content,#login,#stats{
+    display:none;
+    margin-top:25px;
+    padding:20px;
+    border:1px solid #333;
+    line-height:1.7;
+}
+#content{white-space:pre-line}
+input{
+    padding:13px;
+    width:100%;
+    background:#111;
+    border:1px solid #555;
+    color:white;
+    font:inherit;
+}
+.red{color:#b00000}
+.stat{
+    border-bottom:1px solid #333;
+    padding:10px 0;
+}
+</style>
+</head>
+
+<body>
+
+<div id="app">
+
+<h1>ReDood</h1>
+
+<div id="menu">
+
+<button onclick="admin()">ADMİN GİRİŞ</button>
+<button onclick="show(1)">1</button>
+<button onclick="show(2)">2</button>
+<button onclick="show(3)">3</button>
+<button onclick="show(4)">4</button>
+<button onclick="show(5)">5</button>
+
+</div>
+
+<div id="login">
+    <h2>ADMİN GİRİŞ</h2>
+    <input id="password" type="password" placeholder="Şifre">
+    <br><br>
+    <button onclick="checkPassword()">GİRİŞ</button>
+    <p id="wrong" class="red"></p>
+</div>
+
+<div id="content"></div>
+
+<div id="stats">
+    <h2>📊 TIKLAMA İSTATİSTİKLERİ</h2>
+
+    <div class="stat">1 → <span id="s1">0</span> tıklama</div>
+    <div class="stat">2 → <span id="s2">0</span> tıklama</div>
+    <div class="stat">3 → <span id="s3">0</span> tıklama</div>
+    <div class="stat">4 → <span id="s4">0</span> tıklama</div>
+    <div class="stat">5 → <span id="s5">0</span> tıklama</div>
+
+    <button onclick="resetStats()">İSTATİSTİKLERİ SIFIRLA</button>
+</div>
+
+</div>
+
+<script>
+
+const ADMIN_PASSWORD = "ŞİFRE";
+
+let click3 = 0;
+
+function hideAll(){
+    document.getElementById("content").style.display="none";
+    document.getElementById("login").style.display="none";
+    document.getElementById("stats").style.display="none";
+}
+
+function admin(){
+
+    hideAll();
+
+    if(localStorage.getItem("redood_admin")==="true"){
+        showAdmin();
+        return;
+    }
+
+    document.getElementById("login").style.display="block";
+}
+
+function checkPassword(){
+
+    const p=document.getElementById("password").value;
+
+    if(p===ADMIN_PASSWORD){
+
+        localStorage.setItem("redood_admin","true");
+
+        document.getElementById("login").style.display="none";
+
+        showAdmin();
+
+    }else{
+        document.getElementById("wrong").innerText="Şifre yanlış.";
+    }
+}
+
+function showAdmin(){
+
+    const c=document.getElementById("content");
+
+    c.innerText=
+`Selam yabancı.
+
+Buraya gelme sebebin şifreyi bilmen.
+Seni tebrik ederim, beni buldun.
+
+Ama yanında değilim.
+En yakınındayım.
+
+Bir telefonla unutma...
+Gizem yeni başlıyor :)`;
+
+    c.style.display="block";
+
+    showStatsButton();
+}
+
+function showStatsButton(){
+
+    if(document.getElementById("statsButton")) return;
+
+    const b=document.createElement("button");
+
+    b.id="statsButton";
+    b.innerText="📊 İSTATİSTİKLERİ GÖR";
+    b.onclick=showStats;
+
+    document.getElementById("menu").appendChild(b);
+}
+
+function countClick(n){
+
+    let key="redood_click_"+n;
+
+    let count=parseInt(localStorage.getItem(key)||"0");
+
+    count++;
+
+    localStorage.setItem(key,count);
+}
+
+function showStats(){
+
+    hideAll();
+
+    document.getElementById("stats").style.display="block";
+
+    for(let i=1;i<=5;i++){
+
+        let count=localStorage.getItem("redood_click_"+i)||"0";
+
+        document.getElementById("s"+i).innerText=count;
+    }
+}
+
+function resetStats(){
+
+    for(let i=1;i<=5;i++){
+        localStorage.removeItem("redood_click_"+i);
+    }
+
+    showStats();
+}
+
+function show(n){
+
+    countClick(n);
+
+    if(n===3){
+
+        click3++;
+
+        const c=document.getElementById("content");
+
+        c.innerText=
+`MERHABA.
+
+BURAYA GELME.
+BİR DAHA GELME.
+
+BURADA KALMA.
+UZAK DUR.`;
+
+        c.style.display="block";
+
+        if(click3>=3){
+
+            document.getElementById("menu").style.display="none";
+            document.getElementById("content").style.display="none";
+
+            document.body.innerHTML=
+            '<h1 style="text-align:center;margin-top:100px;color:#900">ERİŞİM SONLANDIRILDI</h1>';
+        }
+
+        return;
+    }
+
+    const texts={
+
+1:`ReDood
+
+ReDood kim?
+Bilinmiyor.
+
+Bu kişinin kim olduğu belirsiz.
+Erkek veya kadın olduğu kesin olarak bilinmiyor.
+
+Kurguya göre ReDood, gizemli bir seri katil olarak anlatılır.
+
+Kurbanların yüzlerinde kendine özgü
+bir gülümseme sembolü bulunduğu söylenir.
+
+Kurbanların yanında dört satırlık bir şiir bulunur.
+
+Gözlerinde karanlık gördüm
+Ay doğduğunda
+Başını taşlara vururdun
+Son gülen sen oldun
+
+Her üç satırdan sonra gelen son satır,
+ReDood'un imzası olarak kabul edilir.
+
+Şu ana kadar 26 kurban olduğu iddia edilmektedir.
+
+Katile uyarımız:
+"Lütfen bir medyuma bulaşma :)"`,
+
+2:`Merhaba.
+
+Sen de şu an düşünüyorsun:
+ReDood kim?
+
+Şunu söyleyebilirim:
+
+Gerçek biri.
+
+Ama ben de kim olduğunu bilmiyorum.
+
+Sana birkaç ipucu bıraktım.
+Lütfen dikkatli ol ve hareketlerine dikkat et.
+
+Seni yakalamasın.`,
+
+4:`Uğur kapımızda.
+Şans bıçağımızda.
+Kan damarda.
+
+Dikkat et yabancı.
+
+Bunu sana gönderdiğim için şanslısın.
+Ama dikkat et, seni de kaybetmeyelim.
+
+Beni bir ara bul.
+
+Ama saklanacağım.
+
+İpuçlarını çöz ve öyle gel.
+
+Görüşmek üzere.`,
+
+5:`ŞİFRE
+
+3 2 5 9 7 3
+
+C B E Ğ F C
+
+Cesur Balık EĞridir Fakat Cesurdur
+
+Kusurlu olmak Cesur olmayı etkilemez...
+
+(BİLMECE)
+
+Beni görürsün ama dokunamazsın.
+Bazen rakam, bazen harf olurum.
+Doğru çözülürsem gizli kapıyı açarım.
+Yanlış çözülürsem hiçbir şey söylemem.
+
+Bazen doğru cevabı bulmak için başa dönmek gerekir.
+
+İlerlediğin yolu unutma,
+ama geldiğin yeri de hatırla :)`
+
+    };
+
+    const c=document.getElementById("content");
+
+    c.innerText=texts[n]||"";
+
+    c.style.display="block";
+}
+
+</script>
+
+</body>
+</html>
