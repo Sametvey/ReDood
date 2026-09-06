@@ -809,25 +809,6 @@ Yolun devam ediyor.`
     c.style.display="block";
 }
 
-function unlockChapter5(){
-
-    const p=document.getElementById("chapter5Password");
-    const wrong=document.getElementById("chapter5Wrong");
-
-    if(p.value===REDOOD5_PASSWORD){
-
-        localStorage.setItem("redood5_unlocked","true");
-
-        document.getElementById("chapter5Five").style.display="block";
-
-        wrong.innerText="Şifre doğru. 5. bölüm açıldı.";
-
-    }else{
-
-        wrong.innerText="Şifre yanlış.";
-        p.value="";
-    }
-}
 
 function loadChapter5(){
 
