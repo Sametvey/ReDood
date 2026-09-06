@@ -73,6 +73,15 @@ input{
 <button onclick="show(4)">4</button>
 <button onclick="show(5)">5</button>
 
+<div id="chapter2" style="display:none;margin-top:25px">
+    <h2 class="red">ReDood 2</h2>
+    <button onclick="show2(1)">1</button>
+    <button onclick="show2(2)">2</button>
+    <button onclick="show2(3)">3</button>
+    <button onclick="show2(4)">4</button>
+    <button onclick="show2(5)">5</button>
+</div>
+
 </div>
 
 <div id="login">
@@ -159,6 +168,10 @@ Gizem yeni başlıyor :)`;
     c.style.display="block";
 
     showStatsButton();
+
+    document.getElementById("chapter2").style.display="block";
+
+    showNotes();
 }
 
 function showStatsButton(){
@@ -333,6 +346,119 @@ ama geldiğin yeri de hatırla :)`
     c.innerText=texts[n]||"";
 
     c.style.display="block";
+}
+
+
+function show2(n){
+
+    const texts2={
+
+1:`Merhaba yabancı, sonunda görüştük.
+Ben gelmeni ummazdım ama geldin.
+
+Sana ilk sorumu soracağım:
+
+Cesur Balık EĞridir Fakat Cesurdur
+
+Burada şifren var.
+Geçişin, unutma burayı.
+
+Bir daha gel.
+Unutma beni.`,
+
+2:`Selam, nasılsın?
+
+Galiba yorgunsun.
+Geldiğin yol yol değil,
+gittiğin düzlük düz değil.
+
+Eğri büğrü gidersen yol sen olursun.
+Nasılsan yolun öyledir.
+
+Unutma:
+Baştan başlar yolun.`,
+
+3:`Bu gizemi çözmen için daha yolun var.
+
+Ama Shimoneta selam söyledi.
+Tanıyormuşsun.
+
+Yakında görüşeceksiniz.
+Ama bir gün.`,
+
+4:`Bana yardım et ve şifremi bul.
+
+Yola devam edemedim.
+Galiba başı şöyleydi:
+
+Su sakardır gönlüm başkadır
+Seni gören gözler taştandır
+
+Şaka şaka, böyle değil.
+
+Şifremi sonra bulacaksın.
+Yoluna devam et.
+
+Başka kimseye güvenme.
+
+Yoldaş :)`,
+
+5:`Sona yaklaştın.
+
+Katili bulacaksın ama şuna dikkat et:
+
+Bazen içimizdeki karanlık yolcu
+bize engel olur.
+
+Ama kalbinin ışığını unutma.
+
+Karanlık olduğunda ışık da vardır.
+
+Sen yolunu seçeceksin:
+Karanlık ya da ışık :)`
+
+    };
+
+    const c=document.getElementById("content");
+
+    c.innerText=texts2[n]||"";
+    c.style.display="block";
+}
+
+function showNotes(){
+
+    if(document.getElementById("privateNotes")) return;
+
+    const box=document.createElement("div");
+
+    box.id="privateNotes";
+
+    box.style.marginTop="25px";
+    box.style.padding="20px";
+    box.style.border="1px solid #333";
+
+    box.innerHTML=`
+        <h2 class="red">🔐 ÖZEL NOTLARIM</h2>
+        <textarea id="myNotes"
+        style="width:100%;min-height:150px;background:#111;color:#ddd;border:1px solid #555;padding:12px;font:inherit"
+        placeholder="Buraya kendi notunu yaz..."></textarea>
+        <button onclick="saveNotes()">NOTU KAYDET</button>
+        <p id="noteSaved"></p>
+    `;
+
+    document.getElementById("content").appendChild(box);
+
+    document.getElementById("myNotes").value=
+        localStorage.getItem("redood_private_notes")||"";
+}
+
+function saveNotes(){
+
+    const text=document.getElementById("myNotes").value;
+
+    localStorage.setItem("redood_private_notes",text);
+
+    document.getElementById("noteSaved").innerText="Not kaydedildi.";
 }
 
 </script>
