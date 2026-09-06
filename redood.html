@@ -145,11 +145,12 @@ input{
 <div id="chapter5" style="display:none;margin-top:25px">
     <h2 class="red" onclick="redoodSecret()">ReDood 5</h2>
 
-    <button onclick="show5(1)">1</button>
-    <button onclick="show5(2)">2</button>
-    <button onclick="show5(3)">3</button>
+    <div id="chapter5All" style="display:none">
+        <button onclick="show5(1)">1</button>
+        <button onclick="show5(2)">2</button>
+        <button onclick="show5(3)">3</button>
 
-    <button onclick="show5(4)">4</button>
+        <button onclick="show5(4)">4</button>
 
     <div id="robodyInput" style="display:none;margin-top:15px">
         <input id="robodiName" type="text" placeholder="Adın ne?">
@@ -163,7 +164,8 @@ input{
         <p id="chapter5Wrong" class="red"></p>
     </div>
 
-    <button id="chapter5Five" onclick="show5(5)" style="display:none">5</button>
+        <button onclick="show5(5)">5</button>
+    </div>
 </div>
 
 </div>
@@ -232,7 +234,6 @@ Gizem yeni başlıyor :)`;
     document.getElementById("chapter2").style.display="block";
     document.getElementById("chapter3").style.display="block";
     document.getElementById("chapter4").style.display="block";
-    document.getElementById("chapter5").style.display="block";
 
     loadChapter4();
     loadChapter5();
@@ -695,10 +696,13 @@ function unlockChapter4(){
     if(p.value===REDOOD4_PASSWORD){
 
         localStorage.setItem("redood4_unlocked","true");
+        localStorage.setItem("redood5_access","true");
 
         document.getElementById("chapter4Five").style.display="block";
 
-        wrong.innerText="Şifre doğru. 5. bölüm açıldı.";
+        document.getElementById("chapter5").style.display="block";
+
+        wrong.innerText="Şifre doğru. ReDood 5 açıldı.";
 
     }else{
 
@@ -831,9 +835,14 @@ function unlockChapter5(){
 
 function loadChapter5(){
 
-    if(localStorage.getItem("redood5_unlocked")==="true"){
+    if(localStorage.getItem("redood5_access")==="true"){
 
-        document.getElementById("chapter5Five").style.display="block";
+        document.getElementById("chapter5").style.display="block";
+        document.getElementById("chapter5All").style.display="block";
+
+    }else{
+
+        document.getElementById("chapter5").style.display="none";
     }
 }
 
