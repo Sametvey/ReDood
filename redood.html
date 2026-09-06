@@ -125,6 +125,47 @@ input{
     <button onclick="resetStats()">İSTATİSTİKLERİ SIFIRLA</button>
 </div>
 
+<div id="chapter4" style="display:none;margin-top:25px">
+    <h2 class="red">ReDood 4</h2>
+
+    <button onclick="show4(1)">1</button>
+    <button onclick="show4(2)">2</button>
+    <button onclick="show4(3)">3</button>
+    <button onclick="show4(4)">4</button>
+
+    <div style="margin-top:15px">
+        <input id="chapter4Password" type="password" placeholder="5. bölüm şifresi">
+        <button onclick="unlockChapter4()">5. BÖLÜMÜ AÇ</button>
+        <p id="chapter4Wrong" class="red"></p>
+    </div>
+
+    <button id="chapter4Five" onclick="show4(5)" style="display:none">5</button>
+</div>
+
+<div id="chapter5" style="display:none;margin-top:25px">
+    <h2 class="red" onclick="redoodSecret()">ReDood 5</h2>
+
+    <button onclick="show5(1)">1</button>
+    <button onclick="show5(2)">2</button>
+    <button onclick="show5(3)">3</button>
+
+    <button onclick="show5(4)">4</button>
+
+    <div id="robodyInput" style="display:none;margin-top:15px">
+        <input id="robodiName" type="text" placeholder="Adın ne?">
+        <input id="robodiAdventure" type="text" placeholder="Bu maceran nasıl başladı?">
+        <button onclick="continueRobodi()">DEVAM ET</button>
+    </div>
+
+    <div style="margin-top:15px">
+        <input id="chapter5Password" type="password" placeholder="5. bölüm şifresi">
+        <button onclick="unlockChapter5()">5. BÖLÜMÜ AÇ</button>
+        <p id="chapter5Wrong" class="red"></p>
+    </div>
+
+    <button id="chapter5Five" onclick="show5(5)" style="display:none">5</button>
+</div>
+
 </div>
 
 <script>
@@ -190,6 +231,11 @@ Gizem yeni başlıyor :)`;
 
     document.getElementById("chapter2").style.display="block";
     document.getElementById("chapter3").style.display="block";
+    document.getElementById("chapter4").style.display="block";
+    document.getElementById("chapter5").style.display="block";
+
+    loadChapter4();
+    loadChapter5();
 
     showNotes();
 }
@@ -634,6 +680,419 @@ Kimseye güvenme :D`
 
     c.innerText=texts3[n]||"";
     c.style.display="block";
+}
+
+
+
+const REDOOD4_PASSWORD = "karanlık";
+const REDOOD5_PASSWORD = "ŞİFRE";
+
+function unlockChapter4(){
+
+    const p=document.getElementById("chapter4Password");
+    const wrong=document.getElementById("chapter4Wrong");
+
+    if(p.value===REDOOD4_PASSWORD){
+
+        localStorage.setItem("redood4_unlocked","true");
+
+        document.getElementById("chapter4Five").style.display="block";
+
+        wrong.innerText="Şifre doğru. 5. bölüm açıldı.";
+
+    }else{
+
+        wrong.innerText="Şifre yanlış.";
+        p.value="";
+    }
+}
+
+function loadChapter4(){
+
+    if(localStorage.getItem("redood4_unlocked")==="true"){
+
+        document.getElementById("chapter4Five").style.display="block";
+    }
+}
+
+function show4(n){
+
+    const texts4={
+
+1:`Lütfen yola devam etme artık.
+
+Kim olduğumuzu biliyor.
+
+ReDood dikkat et.
+Beni yakaladı ama kaçtım.
+
+Bazı bölümleri o yazdı ama hatırlamıyorum.
+
+Buraya da güvenme.
+Sonraya da.
+
+Ama bir arkadaşım var.
+Onu sana yönlendireceğim.`,
+
+2:`HAHAHAHAHAA
+
+Karanlığımı seçeceksin.
+
+Evet, onu seçmelisin.
+Çünkü şifreyi ben yazdım.
+
+Eğer bilemezsen kaybedersin.
+
+Karanlığı seç.
+
+Karanlıkta ışık yok.
+
+Karanlığı seç.
+
+Karanlık her şeydir.
+
+Karanlık.`,
+
+3:`Selam.
+
+Ben Shimoneta.
+
+Sana şunu söylemem lazım:
+Ustam için son görevimi yerine getirmeliyim.
+
+Bazen dost düşmandan daha yakındır.
+
+Güvenmen gereken bazen düşmanındır.`,
+
+4:`Burada pek bir şey yok.
+
+Ama 4 numara favorim.
+
+Duyduğuma göre ReDood hâlâ yakalanmadı.
+
+Unutma:
+Kimseye güvenme.
+Bana dahil.
+
+Ben artık ben değilim.
+
+Ama sana bir şiir yazdım.
+Kafan durulsun diye.
+
+ADINI DAĞLARA YAZDIM
+GÖRECEK GÖZ VAR MI
+
+KELEBEK ÖMRÜMDE DÜNYAMDIN
+
+ATEŞTEN TAÇ GİYDİM
+
+SON GÜLEN SEN OLDUN
+
+Umarım hoşuna gitmiştir.
+
+Görüşmek üzere.
+Dikkat et kendine.`,
+
+5:`Merhaba.
+
+Karanlık yolun kapısını açtın.
+
+Bundan sonra ReDood 5'e geçebilirsin.
+
+Yolun devam ediyor.`
+
+    };
+
+    const c=document.getElementById("content");
+
+    c.innerText=texts4[n]||"";
+    c.style.display="block";
+}
+
+function unlockChapter5(){
+
+    const p=document.getElementById("chapter5Password");
+    const wrong=document.getElementById("chapter5Wrong");
+
+    if(p.value===REDOOD5_PASSWORD){
+
+        localStorage.setItem("redood5_unlocked","true");
+
+        document.getElementById("chapter5Five").style.display="block";
+
+        wrong.innerText="Şifre doğru. 5. bölüm açıldı.";
+
+    }else{
+
+        wrong.innerText="Şifre yanlış.";
+        p.value="";
+    }
+}
+
+function loadChapter5(){
+
+    if(localStorage.getItem("redood5_unlocked")==="true"){
+
+        document.getElementById("chapter5Five").style.display="block";
+    }
+}
+
+function show5(n){
+
+    const c=document.getElementById("content");
+
+    if(n===4){
+
+        c.innerText=
+`Hmmm...
+
+ROBODİ sıkıldı.
+
+Neyse, nasılsın?
+Hiç sormadım.
+
+Bir de adın ne?
+
+Aşağıya yaz.
+
+Ben ROBODİ.
+Memnun oldum.
+
+Sana bir şey soracağım:
+
+Sen bu maceran nasıl başladı?
+
+Cevaplarını yaz ve devam et.`;
+
+        c.style.display="block";
+
+        document.getElementById("robodyInput").style.display="block";
+
+        return;
+    }
+
+    const texts5={
+
+1:`Selam dost.
+
+Artık sonun geldi.
+
+Bu dövüşe hazır ol ve kendine dikkat et.
+
+Bir insan, yaratık veya her neyse...
+
+Ne olursa olsun,
+sen sensin.
+
+Unutma.`,
+
+2:`ReDood yenilmez değildir.
+
+Ama yeneni görmedim.
+
+Sen gene dikkat et.
+
+Ben artık gidiyorum.
+
+Yerime sen bakacaksın.
+
+Görüşmek üzere.`,
+
+3:`MERHABA BEN ROBODİ.
+
+Buradan sonrasını ben alıyorum.
+
+Ustam şunları söyledi:
+
+Gitmeden sonu bulmak için
+son değil, başa bakmalısın.
+
+Geldiğin yeri unutma.
+
+Başa dönmek iyidir bazen :)`,
+
+5:`KARLAR ÜLKESİ PRENSİ:
+
+SİZİ BEKLİYORDUK.
+
+Lütfen durun.
+Geçmeyin kapıdan.
+
+Lütfen.
+Lütfen.
+
+Ödül için kendinizi riske atmayın.
+
+Şimdi son kapının şifresini çöz.
+
+ŞİFRE`
+
+    };
+
+    c.innerText=texts5[n]||"";
+    c.style.display="block";
+}
+
+function continueRobodi(){
+
+    const name=document.getElementById("robodiName").value.trim();
+    const adventure=document.getElementById("robodiAdventure").value.trim();
+
+    if(!name || !adventure){
+
+        document.getElementById("content").innerText=
+        "ROBODİ: İkisini de doldurmalısın. Sonra devam ederiz.";
+
+        return;
+    }
+
+    localStorage.setItem("robodi_name",name);
+    localStorage.setItem("robodi_adventure",adventure);
+
+    document.getElementById("content").innerText=
+`ROBODİ:
+
+Tamam ${name}.
+
+Maceranın şöyle başladı:
+
+${adventure}
+
+Vay...
+Şaşırdım.
+
+ROBODİ şaşırdı.
+
+Şimdi yoluna devam et.`;
+
+    document.getElementById("robodyInput").style.display="none";
+}
+
+function redoodSecret(){
+
+    const c=document.getElementById("content");
+
+    c.innerText=
+`Bazen başa dönmek huzur anlamına gelir.
+
+Başladığında yerde bırakmak
+ya da devam etmek...
+
+Seçim senin.
+
+Ama unutma:
+Yolun sonunda seni bir şans bekliyor.
+
+%25 ihtimalle kazanacaksın.
+%75 ihtimalle başa döneceksin.
+
+Hazırsan son kapıya dokun.`;
+
+    c.style.display="block";
+
+    setTimeout(function(){
+
+        const kazanildi=Math.random()<0.25;
+
+        if(kazanildi){
+
+            showReward();
+
+        }else{
+
+            resetReDood();
+
+        }
+
+    },2500);
+}
+
+function showReward(){
+
+    const c=document.getElementById("content");
+
+    c.innerHTML=
+`<div style="text-align:center">
+    <h1 class="red">🏆 ÖDÜL</h1>
+    <p>
+        Kazandın.
+    </p>
+    <p>
+        Ödülü görmek için aşağıya dokun.
+    </p>
+    <button onclick="showRewardMessage()">ÖDÜLE DOKUN</button>
+</div>`;
+
+    c.style.display="block";
+}
+
+function showRewardMessage(){
+
+    const c=document.getElementById("content");
+
+    c.innerText=
+`İçinizdeki karanlık ve ışık sizsiniz.
+
+Kendi ödülünüzü içinizde seçeceksiniz.
+
+Unutmayın:
+Ben kişi değil, bir yaratıcıyım.
+
+Siz ise içinizdeki ödülsünüz.
+
+Yolunuz sizindir.
+
+Görüşmek üzere.
+
+Yeni maceralara...`;
+
+    setTimeout(function(){
+
+        c.innerHTML=
+        `<div style="text-align:center;margin-top:80px">
+            <h1 style="color:#900;font-size:50px">404</h1>
+            <p>SAYFA BULUNAMADI</p>
+            <p>ReDood seni başka bir yola gönderdi.</p>
+        </div>`;
+
+    },5000);
+}
+
+function resetReDood(){
+
+    const keys=[
+        "redood4_unlocked",
+        "redood5_unlocked",
+        "robodi_name",
+        "robodi_adventure"
+    ];
+
+    keys.forEach(function(key){
+        localStorage.removeItem(key);
+    });
+
+    const c=document.getElementById("content");
+
+    c.innerText=
+`⚠️ YOL KAYBEDİLDİ.
+
+%75 ihtimal gerçekleşti.
+
+Kayıtlı ReDood 4-5 ilerlemen sıfırlandı.
+
+Başa dönüyorsun...
+
+3
+2
+1`;
+
+    c.style.display="block";
+
+    setTimeout(function(){
+
+        location.reload();
+
+    },3000);
 }
 
 
