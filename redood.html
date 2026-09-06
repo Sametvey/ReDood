@@ -164,7 +164,7 @@ input{
         <p id="chapter5Wrong" class="red"></p>
     </div>
 
-        <button onclick="show5(5)">5</button>
+        <button onclick="redood5Final()">5</button>
     </div>
 </div>
 
@@ -977,63 +977,9 @@ ROBODİ şaşırdı.
     document.getElementById("robodyInput").style.display="none";
 }
 
-function redoodSecret(){
 
-    const c=document.getElementById("content");
 
-    c.innerText=
-`Bazen başa dönmek huzur anlamına gelir.
 
-Başladığında yerde bırakmak
-ya da devam etmek...
-
-Seçim senin.
-
-Ama unutma:
-Yolun sonunda seni bir şans bekliyor.
-
-%25 ihtimalle kazanacaksın.
-%75 ihtimalle başa döneceksin.
-
-Hazırsan son kapıya dokun.`;
-
-    c.style.display="block";
-
-    setTimeout(function(){
-
-        const kazanildi=Math.random()<0.25;
-
-        if(kazanildi){
-
-            showReward();
-
-        }else{
-
-            resetReDood();
-
-        }
-
-    },2500);
-}
-
-function showReward(){
-
-    const c=document.getElementById("content");
-
-    c.innerHTML=
-`<div style="text-align:center">
-    <h1 class="red">🏆 ÖDÜL</h1>
-    <p>
-        Kazandın.
-    </p>
-    <p>
-        Ödülü görmek için aşağıya dokun.
-    </p>
-    <button onclick="showRewardMessage()">ÖDÜLE DOKUN</button>
-</div>`;
-
-    c.style.display="block";
-}
 
 function showRewardMessage(){
 
@@ -1104,6 +1050,146 @@ Başa dönüyorsun...
     },3000);
 }
 
+
+
+function redood5Final(){
+
+    const c=document.getElementById("content");
+
+    c.innerHTML=`
+<h2 class="red">KARLAR ÜLKESİ PRENSİ SİZİ BEKLİYORDUK</h2>
+
+<p>
+Lütfen durun. Geçmeyin kapıdan.<br><br>
+
+Ödül için canınızı riske atmayın.
+</p>
+
+<button onclick="askFinalPassword()">DEVAM ET</button>
+`;
+
+    c.style.display="block";
+}
+
+
+function askFinalPassword(){
+
+    const c=document.getElementById("content");
+
+    c.innerHTML=`
+<h2 class="red">SON ŞİFRE</h2>
+
+<p>Şifreyi gir.</p>
+
+<input id="finalPassword" type="text" placeholder="Şifre">
+
+<br><br>
+
+<button onclick="checkReDood5Password()">GİR</button>
+
+<p id="finalWrong" class="red"></p>
+`;
+
+    c.style.display="block";
+}
+
+
+function checkReDood5Password(){
+
+    const pass=document.getElementById("finalPassword").value.trim();
+
+    if(pass==="ŞİFRE"){
+
+        showReDoodReward();
+
+    }else{
+
+        document.getElementById("finalWrong").innerText=
+        "Yanlış şifre. Kapı açılmadı.";
+    }
+}
+
+
+function showReDoodReward(){
+
+    const c=document.getElementById("content");
+
+    c.innerHTML=`
+<h2 class="red">ÖDÜL</h2>
+
+<p>
+Ödül seni bekliyor.
+
+Ama her ödülün bir riski vardır.
+</p>
+
+<button onclick="tryReDoodReward()">ÖDÜLE TIKLA</button>
+`;
+
+    c.style.display="block";
+}
+
+
+function tryReDoodReward(){
+
+    const win=Math.random() < 0.25;
+
+    const c=document.getElementById("content");
+
+    if(win){
+
+        c.innerHTML=`
+<h1 class="red">KAZANDIN</h1>
+
+<p>
+İçinizdeki karanlık ve ışık sizsiniz.
+
+Kendi ödülünüzü içinizde seçeceksiniz.
+
+Unutmayın.
+
+Ben kişi değil, bir yaratıcıyım.
+
+Siz ise içinizdeki ödülsünüz.
+
+Yolunuz sizindir.
+
+Görüşmek üzere.
+
+Yeni maceralara...
+</p>
+`;
+
+    }else{
+
+        // Kaybedince ReDood 4 ve 5 erişimini sıfırla
+        localStorage.removeItem("redood4_unlocked");
+        localStorage.removeItem("redood5_access");
+
+        // ReDood 4-5 ile ilgili diğer ilerlemeleri de temizle
+        localStorage.removeItem("redood4_progress");
+        localStorage.removeItem("redood5_progress");
+
+        c.innerHTML=`
+<h1 class="red">REDOOD</h1>
+
+<p>
+Bazen başa dönmek huzurdur.
+
+Ama yoluna devam etmek sana kalır.
+</p>
+
+<button onclick="location.reload()">BAŞA DÖN</button>
+`;
+
+        // Bölümleri ekranda hemen gizle
+        const ch4=document.getElementById("chapter4");
+        const ch5=document.getElementById("chapter5");
+
+        if(ch4) ch4.style.display="none";
+        if(ch5) ch5.style.display="none";
+    }
+}
 
 </script>
 
