@@ -82,6 +82,25 @@ input{
     <button onclick="show2(5)">5</button>
 </div>
 
+<div id="chapter3" style="display:none;margin-top:25px">
+    <h2 class="red">ReDood 3</h2>
+
+    <div id="chapter3Lock">
+        <p>Şifre gir, sonra yoluna devam et.</p>
+        <input id="chapter3Password" type="password" placeholder="Şifre">
+        <button onclick="unlockChapter3()">ŞİFREYİ GİR</button>
+        <p id="chapter3Wrong" class="red"></p>
+    </div>
+
+    <div id="chapter3Buttons" style="display:none">
+        <button onclick="show3(1)">1</button>
+        <button onclick="show3(2)">2</button>
+        <button onclick="show3(3)">3</button>
+        <button onclick="show3(4)">4</button>
+        <button onclick="show3(5)">5</button>
+    </div>
+</div>
+
 </div>
 
 <div id="login">
@@ -170,6 +189,7 @@ Gizem yeni başlıyor :)`;
     showStatsButton();
 
     document.getElementById("chapter2").style.display="block";
+    document.getElementById("chapter3").style.display="block";
 
     showNotes();
 }
@@ -460,6 +480,162 @@ function saveNotes(){
 
     document.getElementById("noteSaved").innerText="Not kaydedildi.";
 }
+
+
+const REDOOD3_PASSWORD = "325973";
+
+function unlockChapter3(){
+
+    const p=document.getElementById("chapter3Password");
+    const wrong=document.getElementById("chapter3Wrong");
+
+    if(p.value===REDOOD3_PASSWORD){
+
+        localStorage.setItem("redood3_unlocked","true");
+
+        document.getElementById("chapter3Lock").style.display="none";
+        document.getElementById("chapter3Buttons").style.display="block";
+
+        show3(1);
+
+    }else{
+
+        wrong.innerText="Şifre yanlış.";
+        p.value="";
+    }
+}
+
+function loadChapter3(){
+
+    if(localStorage.getItem("redood3_unlocked")==="true"){
+
+        document.getElementById("chapter3Lock").style.display="none";
+        document.getElementById("chapter3Buttons").style.display="block";
+    }
+}
+
+function show3(n){
+
+    const texts3={
+
+1:`Selam yabancı.
+
+Şifremi buldun.
+Teşekkürler.
+
+Artık bu yolda sona geliyorsun.
+Dikkat et.
+
+Karanlık ve ışık bir olmaz.
+Birini seç.
+
+Kalbinin yönü neredeyse
+onu bul ve kendine dikkat et.
+
+Her an başına iş gelebilir.`,
+
+2:`Karlar ülkesinde prens...
+
+Bu yol senin için dolu.
+Ödül var.
+
+Ödül kıvrak zekâlar içinse,
+ölüm sadece bu maceranın
+rahat geçeceğini düşünme.
+
+Öyle düşün.
+
+Ama tek istediğim:
+4'e geçince dikkat et.
+
+Burayı özleyeceksin :)`,
+
+3:`ReDood beni buldu.
+
+Artık ben ben değilim.
+
+4'e güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!
+güvenme!!!!`,
+
+4:`Merhaba kahraman.
+
+Yolun açık olsun.
+
+Sana şifre vereceğim.
+Onu bul.
+
+Karanlığın içinde karanlık,
+safların içinde karanlık olursa
+güçle dolar.
+
+Ben gücüm.
+Ben tanrıyım.
+
+Benden üstün kim vardır?
+
+AYNAYA BAK.
+
+KİM OLDUĞUNU GÖR.`,
+
+5:`Hahahahahahahshshshaha...
+
+Ben artık ölümüm.
+
+Kendine değil, yoluna bak.
+Eğri büğrü yol değil.
+
+Sen yolunu çizeceksin.
+
+Son görevimi yapayım,
+ama karanlık ele geçirilecek.
+
+Hahahahahhahahaaha...
+
+Sakın 3'tekine güvenme.
+Aptalın biri yazdı.
+
+Hahaha.
+
+4. bölümde görüşürüz.
+
+Her yazılana dikkat et.
+Her şeye dikkat et.
+
+Kimseye güvenme :D`
+
+    };
+
+    const c=document.getElementById("content");
+
+    c.innerText=texts3[n]||"";
+    c.style.display="block";
+}
+
 
 </script>
 
