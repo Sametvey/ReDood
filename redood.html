@@ -7,52 +7,131 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
     margin:0;
-    background:#050505;
-    color:#ddd;
+    background:
+        radial-gradient(circle at 50% 15%,#240000 0%,#0b0000 30%,#030303 75%);
+    color:#cfcfcf;
     font-family:monospace;
+    min-height:100vh;
+    overflow-x:hidden;
 }
+
+/* Sahte kan lekeleri */
+body::before,
+body::after{
+    content:"";
+    position:fixed;
+    pointer-events:none;
+    z-index:0;
+    opacity:.35;
+}
+
+body::before{
+    width:180px;
+    height:260px;
+    left:3%;
+    top:8%;
+    background:
+        radial-gradient(ellipse at 50% 10%,#6d0000 0 7%,transparent 8%),
+        radial-gradient(ellipse at 30% 35%,#450000 0 12%,transparent 13%),
+        radial-gradient(ellipse at 65% 65%,#650000 0 10%,transparent 11%);
+    filter:blur(1px);
+}
+
+body::after{
+    width:220px;
+    height:300px;
+    right:2%;
+    bottom:5%;
+    background:
+        radial-gradient(ellipse at 45% 20%,#500000 0 9%,transparent 10%),
+        radial-gradient(ellipse at 70% 55%,#700000 0 13%,transparent 14%),
+        radial-gradient(ellipse at 30% 85%,#420000 0 8%,transparent 9%);
+}
+
 #app{
+    position:relative;
+    z-index:1;
     max-width:850px;
     margin:auto;
     padding:25px;
 }
+
 h1{
-    color:#b00000;
+    color:#a00000;
     text-align:center;
-    letter-spacing:5px;
+    letter-spacing:6px;
+    text-shadow:
+        0 0 5px #500000,
+        0 0 15px #250000;
 }
+
+h2{
+    text-shadow:0 0 8px #300000;
+}
+
 button{
     width:100%;
     margin:7px 0;
     padding:15px;
-    background:#0d0d0d;
-    color:#ddd;
-    border:1px solid #444;
+    background:#080606;
+    color:#bbb;
+    border:1px solid #450000;
     font:inherit;
     cursor:pointer;
+    box-shadow:0 0 8px #180000;
+    transition:.2s;
 }
-button:hover{background:#191919}
+
+button:hover{
+    background:#180000;
+    border-color:#900000;
+    color:#eee;
+    box-shadow:
+        0 0 8px #600000,
+        0 0 18px #250000;
+}
+
 #content,#login,#stats{
     display:none;
     margin-top:25px;
     padding:20px;
-    border:1px solid #333;
+    background:rgba(5,0,0,.82);
+    border:1px solid #3d0000;
     line-height:1.7;
+    box-shadow:
+        inset 0 0 25px #100000,
+        0 0 12px #150000;
 }
-#content{white-space:pre-line}
+
+#content{
+    white-space:pre-line;
+}
+
 input{
     padding:13px;
     width:100%;
-    background:#111;
-    border:1px solid #555;
+    background:#080606;
+    border:1px solid #500000;
     color:white;
     font:inherit;
+    outline:none;
 }
-.red{color:#b00000}
+
+input:focus{
+    border-color:#a00000;
+    box-shadow:0 0 10px #300000;
+}
+
+.red{
+    color:#a00000;
+    text-shadow:0 0 7px #350000;
+}
+
 .stat{
-    border-bottom:1px solid #333;
+    border-bottom:1px solid #300000;
     padding:10px 0;
 }
 </style>
