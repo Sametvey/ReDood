@@ -135,13 +135,7 @@ input{
     <button onclick="show4(3)">3</button>
     <button onclick="show4(4)">4</button>
 
-    <div style="margin-top:15px">
-        <input id="chapter4Password" type="password" placeholder="5. bölüm şifresi">
-        <button onclick="unlockChapter4()">5. BÖLÜMÜ AÇ</button>
-        <p id="chapter4Wrong" class="red"></p>
-    </div>
-
-    <button id="chapter4Five" onclick="show4(5)" style="display:none">5</button>
+    <button onclick="openChapter4Five()">5</button>
 </div>
 
 <div id="chapter5" style="display:none;margin-top:25px">
@@ -686,26 +680,56 @@ Kimseye güvenme :D`
 const REDOOD4_PASSWORD = "karanlık";
 const REDOOD5_PASSWORD = "ŞİFRE";
 
+function openChapter4Five(){
+
+    const c=document.getElementById("content");
+
+    c.innerHTML=`
+<h2 class="red">ŞİFRE GİR YABANCI</h2>
+
+<p>ReDood 5'in kapısı şifreyi bekliyor.</p>
+
+<input id="chapter4Password" type="password" placeholder="Şifre">
+
+<br><br>
+
+<button onclick="unlockChapter4()">GİR</button>
+
+<p id="chapter4Wrong" class="red"></p>
+`;
+
+    c.style.display="block";
+}
+
+
 function unlockChapter4(){
 
-    const p=document.getElementById("chapter4Password");
-    const wrong=document.getElementById("chapter4Wrong");
+    const pass=document.getElementById("chapter4Password").value.trim();
 
-    if(p.value===REDOOD4_PASSWORD){
+    if(pass==="karanlık"){
 
-        localStorage.setItem("redood4_unlocked","true");
         localStorage.setItem("redood5_access","true");
 
-        document.getElementById("chapter4Five").style.display="block";
-
         document.getElementById("chapter5").style.display="block";
+        document.getElementById("chapter5All").style.display="block";
 
-        wrong.innerText="Şifre doğru. ReDood 5 açıldı.";
+        const c=document.getElementById("content");
+
+        c.innerHTML=`
+<h2 class="red">ReDood 5</h2>
+
+<p>
+Şifre doğru.<br><br>
+Kapı açıldı.
+</p>
+`;
+
+        c.style.display="block";
 
     }else{
 
-        wrong.innerText="Şifre yanlış.";
-        p.value="";
+        document.getElementById("chapter4Wrong").innerText=
+        "Şifre yanlış.";
     }
 }
 
