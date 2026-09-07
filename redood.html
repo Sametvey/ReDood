@@ -134,6 +134,26 @@ input:focus{
     border-bottom:1px solid #300000;
     padding:10px 0;
 }
+
+#languageBar{
+    position:fixed;
+    top:10px;
+    left:10px;
+    z-index:9999;
+    display:flex;
+    gap:5px;
+}
+
+#languageBar button{
+    width:auto;
+    margin:0;
+    padding:8px 12px;
+    font-size:12px;
+}
+
+body.kurdish #content{
+    display:none !important;
+}
 </style>
 </head>
 
@@ -142,6 +162,11 @@ input:focus{
 <div id="app">
 
 
+
+<div id="languageBar">
+<button onclick="setLanguage('tr')">🇹🇷 Türkçe</button>
+<button onclick="setLanguage('ku')">🟢 Kürtçe</button>
+</div>
 
 <h1>ReDood</h1>
 
@@ -253,6 +278,24 @@ input:focus{
 </div>
 
 <script>
+let currentLanguage=localStorage.getItem("redood_language") || "tr";
+
+function setLanguage(lang){
+    currentLanguage=lang;
+    localStorage.setItem("redood_language",lang);
+
+    if(lang==="ku"){
+        document.body.classList.add("kurdish");
+        document.getElementById("content").style.display="none";
+    }else{
+        document.body.classList.remove("kurdish");
+    }
+}
+
+if(currentLanguage==="ku"){
+    document.body.classList.add("kurdish");
+}
+
 
 const ADMIN_PASSWORD = "ŞİFRE";
 
