@@ -135,6 +135,17 @@ input:focus{
     padding:10px 0;
 }
 
+#sametveyButton{
+    position:fixed;
+    top:10px;
+    right:10px;
+    z-index:9999;
+    width:auto;
+    margin:0;
+    padding:8px 12px;
+    font-size:12px;
+}
+
 #languageBar{
     position:fixed;
     top:10px;
@@ -162,6 +173,8 @@ body.kurdish #content{
 <div id="app">
 
 
+
+<button id="sametveyButton" onclick="sametveyLogin()">Sametvey</button>
 
 <div id="languageBar">
 <button onclick="setLanguage('tr')">🇹🇷 Türkçe</button>
@@ -279,6 +292,36 @@ body.kurdish #content{
 
 <script>
 let currentLanguage=localStorage.getItem("redood_language") || "tr";
+
+function sametveyLogin(){
+
+    const pass=prompt("Sametvey şifresi:");
+
+    if(pass==="325973"){
+
+        localStorage.setItem("sametvey_access","true");
+
+        const ids=[
+            "chapter2",
+            "chapter3",
+            "chapter4",
+            "chapter5",
+            "chapter5All"
+        ];
+
+        ids.forEach(function(id){
+            const el=document.getElementById(id);
+            if(el) el.style.display="block";
+        });
+
+        alert("Tüm hikâye bölümleri açıldı.");
+
+    }else if(pass!==null){
+
+        alert("Şifre yanlış.");
+    }
+}
+
 
 function setLanguage(lang){
     currentLanguage=lang;
