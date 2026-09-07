@@ -62,29 +62,11 @@ input{
 
 <div id="app">
 
-<div id="secretGate">
-    <h1>REDOOD</h1>
 
-    <button onclick="openSecretGate()">GİZLİ ALAN</button>
 
-    <div id="secretLogin" style="display:none;margin-top:20px">
-        <p class="red">ŞİFRE GİR YABANCI</p>
+<h1>ReDood</h1>
 
-        <input id="secretPassword" type="password" placeholder="Şifre">
-
-        <button onclick="unlockSecretGate()">GİR</button>
-
-        <p id="secretWrong" class="red"></p>
-    </div>
-
-    <div id="secretScroll" style="display:none;margin-top:25px">
-        <div id="secretText"></div>
-    </div>
-</div>
-
-<h1 id="mainTitle" style="display:none">ReDood</h1>
-
-<div id="menu" style="display:none">
+<div id="menu">
 
 <button onclick="admin()">ADMİN GİRİŞ</button>
 <button onclick="show(1)">1</button>
@@ -1178,79 +1160,6 @@ ANA SAYFAYA DÖN
 `;
 }
 
-
-function openSecretGate(){
-
-    document.getElementById("secretLogin").style.display="block";
-    document.getElementById("secretPassword").focus();
-
-}
-
-function unlockSecretGate(){
-
-    const pass=document.getElementById("secretPassword").value.trim();
-
-    if(pass!=="ŞİFRE"){
-
-        document.getElementById("secretWrong").innerText=
-        "ŞİFRE GİR YABANCI";
-
-        return;
-    }
-
-    document.getElementById("secretLogin").style.display="none";
-    document.getElementById("secretScroll").style.display="block";
-
-    const text=document.getElementById("secretText");
-
-    const messages=[
-        "ReDood başlıyor...",
-        "1. bölüm...",
-        "2. bölüm...",
-        "3. bölüm...",
-        "4. bölüm...",
-        "5. bölüm...",
-        "Bütün yollar yeniden birleşiyor...",
-        "Gördüğün her şey bir parçaydı.",
-        "Şimdi sıra sende.",
-        "ReDood."
-    ];
-
-    let i=0;
-
-    function next(){
-
-        if(i>=messages.length){
-
-            setTimeout(()=>{
-                document.getElementById("secretGate").style.display="none";
-                document.getElementById("mainTitle").style.display="block";
-                document.getElementById("menu").style.display="block";
-            },1500);
-
-            return;
-        }
-
-        const line=document.createElement("p");
-        line.innerText=messages[i];
-        line.style.opacity="0";
-        line.style.transform="translateY(-25px)";
-        line.style.transition="all 1.2s ease";
-
-        text.appendChild(line);
-
-        setTimeout(()=>{
-            line.style.opacity="1";
-            line.style.transform="translateY(0)";
-        },50);
-
-        i++;
-
-        setTimeout(next,1200);
-    }
-
-    next();
-}
 
 </script>
 
